@@ -1,19 +1,16 @@
+import jwt from "jsonwebtoken";
 
-import jwt from 'jsonwebtoken';
+import fastify from "fastify";
+import { userRoutes } from "./controllers/user.routes";
 
-import fastify from 'fastify';
-import { userRoutes } from './controllers/user.routes';
+const server = fastify();
 
-const server = fastify()
-
-server.register(userRoutes);
+server.register(userRoutes, { prefix: "/user" });
 server.listen({ port: 8080 }, (err, address) => {
   if (err) {
-    console.error(err)
-    process.exit(1)
+    console.error(err);
+    process.exit(1);
   }
-  
-  console.log(`Server listening at ${address}`)
-  
-})
 
+  console.log(`Server listening at ${address}`);
+});
